@@ -1,102 +1,108 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ChatBot from 'react-simple-chatbot';
 export default function Chattbot()
 {
-    function CalculateMarks(props)
+    const FillTheForm=(props)=>
     {
         const {steps}=props;
-        const englishMarks = parseInt(steps.english.value);
-        const mathsMarks = parseInt(steps.maths.value);
-        const scienceMarks = parseInt(steps.science.value);
-        const totalMarks = englishMarks + mathsMarks + scienceMarks;
-        return `Congratulations you got ${totalMarks} marks out of 300`
-        // console.log("steos",steps)
+        console.log("stepssteps",steps)
+        const name = (steps.name.value);
+        const age = (steps.age.value);
+        const gender = (steps.gender.value);
+       
+        return<div style={{ width: '100%' }}>
+        <h3>Student Form</h3>
+        <table style={{width:"100%"}}>
+          <tbody>
+            <tr>
+              <td style={{textAlign:"start"}}>Name</td>
+              <td style={{textAlign:"start"}}>{name}</td>
+            </tr>
+            <tr>
+              <td style={{textAlign:"start"}}>Gender</td>
+              <td style={{textAlign:"start"}}>{gender}</td>
+            </tr>
+            <tr>
+              <td style={{textAlign:"start"}}>Age</td>
+              <td style={{textAlign:"start"}}>{age}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     }
+
+    const config = {
+        botAvatar: "https://cdn-icons-png.flaticon.com/512/4333/4333609.png",
+        floating: true,
+    };
+
+    useEffect(()=>{
+        document.querySelector(".sc-VigVT").innerHTML="<h3>Chat-Bot</h3>"
+    },[])
+    
     return(
         <>
         <ChatBot
-        steps={[
+         {...config}
+         steps={[
             {
             id:"1",
-            message:"Enter your name?",
+            message:"Hello",
             trigger:"2",
             },
             {
                 id:"2",
+                message:"Enter your name ?",
+                trigger:"name",
+            },
+            {
+                id:"name",
                 user:true,
                 trigger:"3",
-                // end:true
             },
             {
                 id:"3",
-                message:"Welcome {previousValue}...",
-                trigger:"4"
+                message:"Now Enter your current age?",
+                trigger:"age",
+            },
+            {
+                id:"age",
+                user:true,
+                trigger:"4",
+                validator:(value)=>{
+                    if(isNaN(value))
+                    {
+                        return "Enter a valid number"
+                    }
+                    return true
+                 
+                },
+                
+                
             },
             {
                 id:"4",
-                message:"Lets Calculate your marks.",
-                trigger:"6"
+                message:"Well done , You are half way done",
+                trigger:"5",
             },
             {
-                id:"6",
-                options:[{value:"ok",label:"ok",trigger:"startenteringmarks"}]
+                id:"5",
+                message:"Select your Gender?",
+                trigger:"gender",
+            },
+            {
+                id:"gender",
+                options:[
+                    {value:"Male",label:"Male",trigger:"10"},
+                    {value:"Female",label:"Female",trigger:"10"},
+                ]
+            },
 
-            },
-            {
-                id:"startenteringmarks",
-                message:"Enter your English marks",
-                trigger:"english"
-            },
-            {
-                id:"english",
-                user:true,
-                validator:(value)=>{
-                    if(isNaN(value) || value>100)
-                    {
-                        return "Enter a valid Number"
-                    }
-                    return true
-                },
-                trigger:"7"
-            },
-            {
-                id:"7",
-                message:"Good, Now enter your Science marks",
-                trigger:"science"
-            },
-            {
-                id:"science",
-                user:true,
-                validator:(value)=>{
-                    if(isNaN(value) || value>100)
-                    {
-                        return "Enter a valid Number"
-                    }
-                    return true
-                },
-                trigger:"9"
-            },
-            {
-                id:"9",
-                message:"Good, Now enter your Maths marks also",
-                trigger:"maths"
-            },
-            {
-                id:"maths",
-                user:true,
-                validator:(value)=>{
-                    if(isNaN(value) || value>100)
-                    {
-                        return "Enter a valid Number"
-                    }
-                    return true
-                },
-                trigger:"10"
-            },
+         
             {
                 id:"10",
-                component:<CalculateMarks/>,
+                component:<FillTheForm/>,
                 end:true
             }
 
