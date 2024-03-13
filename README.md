@@ -45,3 +45,26 @@
       ),
       end: true,
     }, // to create a custom component
+
+9-to update a perticular field like mujhe sirf age hi update karni hai or fir seedha table show karni haii
+  {
+                id:"13",
+                options:[
+                    {label:"Name",value:"Name",trigger:"15"},
+                    {label:"Age",value:"Age",trigger:"16"},
+                    {label:"Gender",value:"Gender",trigger:"17"},
+                ]
+            },
+            
+            {
+                id:"15",
+                update:"name",
+                trigger:"10"
+            },
+
+           update:"name",=> ye hai vahana  {
+                id:"name",
+                user:true,
+                trigger:"3",
+            }, or uske bad table dikh jayegi fir se
+              

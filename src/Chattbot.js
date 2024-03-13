@@ -16,15 +16,15 @@ export default function Chattbot()
         <table style={{width:"100%"}}>
           <tbody>
             <tr>
-              <td style={{textAlign:"start"}}>Name</td>
+              <td style={{textAlign:"start",border:"1px solid purple",borderStyle:"none solid none none"}}>Name</td>
               <td style={{textAlign:"start"}}>{name}</td>
             </tr>
             <tr>
-              <td style={{textAlign:"start"}}>Gender</td>
+              <td style={{textAlign:"start",border:"1px solid purple",borderStyle:"none solid none none"}}>Gender</td>
               <td style={{textAlign:"start"}}>{gender}</td>
             </tr>
             <tr>
-              <td style={{textAlign:"start"}}>Age</td>
+              <td style={{textAlign:"start",border:"1px solid purple",borderStyle:"none solid none none"}}>Age</td>
               <td style={{textAlign:"start"}}>{age}</td>
             </tr>
           </tbody>
@@ -63,7 +63,7 @@ export default function Chattbot()
             },
             {
                 id:"3",
-                message:"Now Enter your current age?",
+                message:"Enter your current age?",
                 trigger:"age",
             },
             {
@@ -78,7 +78,6 @@ export default function Chattbot()
                     return true
                  
                 },
-                
                 
             },
             {
@@ -98,13 +97,57 @@ export default function Chattbot()
                     {value:"Female",label:"Female",trigger:"10"},
                 ]
             },
-
-         
             {
                 id:"10",
                 component:<FillTheForm/>,
-                end:true
+                trigger:"11"
+            },
+            
+            {
+                id:"11",
+                message:" Would you like to update some field?",
+                trigger:"12"
+            },
+           
+            {
+                id:"12",
+                options:[
+                    {label:"Yes",value:"Yes",trigger:"13"},
+                    {label:"No",value:"No",trigger:"14"},
+            ],
             }
+            ,
+            {
+                id:"14",
+                message:" Thank You ",
+                end:true
+            },
+            {
+                id:"13",
+                options:[
+                    {label:"Name",value:"Name",trigger:"15"},
+                    {label:"Age",value:"Age",trigger:"16"},
+                    {label:"Gender",value:"Gender",trigger:"17"},
+                ]
+            },
+            
+            {
+                id:"15",
+                update:"name",
+                trigger:"10"
+            },
+            
+            {
+                id:"16",
+                update:"age",
+                trigger:"10"
+            },
+            
+            {
+                id:"17",
+                update:"gender",
+                trigger:"10"
+            },
 
         ]}
         ></ChatBot>
